@@ -6,11 +6,17 @@ from common import basic
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument('--bucket', help='Name of the destination bucket.', required=True)
 
-def upload_file(client, bucket_name, file_src, file_dest):
-    client.upload_file(file_src, bucket_name, file_dest)
+def __upload_file__(bucket, file_src, file_dest):
+    extra_args = {}
+
+    if file_src.endswith('.html'):
+        extra_args['ContentType'] = 'text/html'
+
+    bucket.upload_file(file_src, file_dest, ExtraArgs=extra_args)
 
 ARGUMENTS = PARSER.parse_args()
-CLIENT = basic.get_s3()
+STHREE = basic.get_s3_resource()
+BUCKET = STHREE.Bucket(ARGUMENTS.bucket)
 
-upload_file(CLIENT, ARGUMENTS.bucket, './tmp/index.html', 'index.html')
-upload_file(CLIENT, ARGUMENTS.bucket, './tmp/404.html', '404.html')
+__upload_file__(BUCKET, './tmp/index.html', 'index.html')
+__upload_file__(BUCKET, './tmp/404.html', '404.html')
