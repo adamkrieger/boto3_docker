@@ -12,7 +12,7 @@ def error(msg):
 
 def notification(msg):
     """Returns message stylized as a notification."""
-    return __color_and_reset__(fore.BLUE, msg)
+    return __color_and_reset__(fore.CYAN, msg)
 
 def success(msg):
     """Returns message stylized as a success."""
