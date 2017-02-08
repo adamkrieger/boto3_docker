@@ -11,4 +11,8 @@ def get_s3():
     )
 
     return client
-    
+
+def get_s3_resource():
+    """Returns an s3 resource"""
+    resource = boto3.resource('s3')
+    return resource
