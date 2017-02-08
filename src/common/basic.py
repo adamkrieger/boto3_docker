@@ -2,7 +2,7 @@
 import boto3
 import os
 
-def get_client():
+def get_s3():
     """Returns an s3 client"""
     client = boto3.client(
         's3',
